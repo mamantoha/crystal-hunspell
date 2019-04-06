@@ -3,6 +3,12 @@ require "./spec_helper"
 describe Hunspell do
   hunspell = Hunspell.new("/usr/share/hunspell/en_US.aff", "/usr/share/hunspell/en_US.dic")
 
+  describe "#encoding" do
+    it "should have encoding" do
+      hunspell.encoding.should eq("UTF-8")
+    end
+  end
+
   describe "#spellcheck" do
     it "should check if a word is valid" do
       hunspell.spellcheck("crystal").should be_true

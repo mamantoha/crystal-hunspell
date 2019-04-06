@@ -15,7 +15,7 @@ class Hunspell
 
   # Returns dictionary encoding
   def encoding : String
-    read_string(LibHunspell._get_dic_encoding(@handle))
+    String.new(LibHunspell._get_dic_encoding(@handle))
   end
 
   # Spellcheck word
@@ -42,24 +42,8 @@ class Hunspell
   end
 
   private def make_list(n : Int32, slst : Pointer(Pointer(UInt8))) : Array(String)
-    words = [] of String
-
-    n.times do |i|
-      words << read_string(slst[i])
+    n.times.reduce([] of String) do |words, i|
+      words << String.new(slst[i])
     end
-
-    words
-  end
-
-  private def read_string(pointer : Pointer(UInt8)) : String
-    i = 0
-
-    loop do
-      code = pointer[i]
-      break if code == 0
-      i += 1
-    end
-
-    String.new(pointer.to_slice(i))
   end
 end
