@@ -1,5 +1,7 @@
 # crystal-hunspell
 
+[![Build Status](https://travis-ci.org/mamantoha/crystal-hunspell.svg?branch=master)](https://travis-ci.org/mamantoha/crystal-hunspell)
+
 Crystal bindings for Hunspell.
 
 ## Installation
