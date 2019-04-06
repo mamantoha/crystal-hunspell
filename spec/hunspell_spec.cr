@@ -35,7 +35,7 @@ describe Hunspell do
 
     context "when there are no stems" do
       it "should return []" do
-       hunspell.stem("zzzzzzz").should be_empty
+        hunspell.stem("zzzzzzz").should be_empty
       end
     end
   end

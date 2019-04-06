@@ -1,6 +1,6 @@
 # crystal-hunspell
 
-TODO: Write a description here
+Crystal bindings for Hunspell.
 
 ## Installation
 
@@ -16,15 +16,38 @@ TODO: Write a description here
 
 ## Usage
 
+Open a dictionary:
+
 ```crystal
 require "hunspell"
+
+# instantiate Hunspell with English affix and dictionary files
+hunspell = Hunspell.new("/usr/share/hunspell/en_US.aff", "/usr/share/hunspell/en_US.dic")
 ```
 
-TODO: Write usage instructions here
+Check if a word is valid:
 
-## Development
+```crystall
+hunspell.spellcheck("crystal")
+# => true
 
-TODO: Write development instructions here
+hunspell.spellcheck("cristal")
+# => false
+```
+
+Find the stems of a word:
+
+```crystall
+hunsell.stem("fishing")
+# => ["fishing", "fish"]
+```
+
+Suggest alternate spellings for a word:
+
+```crystal
+hunspell.suggest("arbitrage")
+# => ["arbitrage", "arbitrages", "arbitrager", "arbitraged", "arbitrate"]
+```
 
 ## Contributing
 
