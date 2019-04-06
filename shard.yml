@@ -1,8 +1,8 @@
-name: crystal-hunspell
+name: hunspell
 version: 0.1.0
 
 authors:
-  - Anton Maminov <anton.linux@gmail.com>
+  - Anton Maminov <anton.maminov@gmail.com>
 
 crystal: 0.27.2
 

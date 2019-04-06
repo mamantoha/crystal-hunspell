@@ -1,6 +1,6 @@
 require "./spec_helper"
 
-describe Crystal::Hunspell do
+describe Hunspell do
   # TODO: Write tests
 
   it "works" do

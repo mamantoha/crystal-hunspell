@@ -9,7 +9,7 @@ TODO: Write a description here
    ```yaml
    dependencies:
      crystal-hunspell:
-       github: your-github-user/crystal-hunspell
+       github: mamantoha/crystal-hunspell
    ```
 
 2. Run `shards install`
@@ -17,7 +17,7 @@ TODO: Write a description here
 ## Usage
 
 ```crystal
-require "crystal-hunspell"
+require "hunspell"
 ```
 
 TODO: Write usage instructions here
@@ -28,7 +28,7 @@ TODO: Write development instructions here
 
 ## Contributing
 
-1. Fork it (<https://github.com/your-github-user/crystal-hunspell/fork>)
+1. Fork it (<https://github.com/mamantoha/crystal-hunspell/fork>)
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
@@ -36,4 +36,4 @@ TODO: Write development instructions here
 
 ## Contributors
 
-- [Anton Maminov](https://github.com/your-github-user) - creator and maintainer
+- [Anton Maminov](https://github.com/mamantoha) - creator and maintainer
