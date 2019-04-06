@@ -18,7 +18,7 @@ describe Hunspell do
 
   describe "#suggest" do
     it "should suggest alternate spellings for words" do
-      hunspell.suggest("crystal").should eq(["Crystal", "crustal", "crystals", "Krystal", "crystal"])
+      hunspell.suggest("crystal").should contain("crustal")
     end
 
     context "when there are no suggestions" do

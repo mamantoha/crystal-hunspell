@@ -45,8 +45,8 @@ hunsell.stem("fishing")
 Suggest alternate spellings for a word:
 
 ```crystal
-hunspell.suggest("crystal")
-# => ["Crystal", "crustal", "crystals", "Krystal", "crystal"]
+hunspell.suggest("arbitrage")	hunspell.suggest("crystal")
+# => ["arbitrage", "arbitrages", "arbitrager", "arbitraged", "arbitrate"]
 ```
 
 ## Contributing
