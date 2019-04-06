@@ -5,7 +5,7 @@ describe Hunspell do
 
   describe "#encoding" do
     it "should have encoding" do
-      hunspell.encoding.should eq("UTF-8")
+      hunspell.encoding.should match(/UTF-8|ISO8859-1/)
     end
   end
 
