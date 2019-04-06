@@ -1,7 +1,4 @@
 language: crystal
-dist: xenial
-crystal:
-  - latest
 
 before_install:
   - sudo apt-get install -y hunspell libhunspell-dev
