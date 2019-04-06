@@ -1,5 +1,7 @@
 # crystal-hunspell
 
+[![Build Status](https://travis-ci.org/mamantoha/crystal-hunspell.svg?branch=master)](https://travis-ci.org/mamantoha/crystal-hunspell)
+
 Crystal bindings for Hunspell.
 
 ## Installation
@@ -45,7 +47,7 @@ hunsell.stem("fishing")
 Suggest alternate spellings for a word:
 
 ```crystal
-hunspell.suggest("arbitrage")
+hunspell.suggest("arbitrage")	hunspell.suggest("crystal")
 # => ["arbitrage", "arbitrages", "arbitrager", "arbitraged", "arbitrate"]
 ```
 
