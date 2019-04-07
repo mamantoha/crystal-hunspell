@@ -8,6 +8,8 @@ Crystal bindings for Hunspell.
 
 ## Installation
 
+Before installing `crystal-hunspell` ensure you have [hunspell](https://github.com/hunspell/hunspell) already installed:
+
 1. Add the dependency to your `shard.yml`:
 
    ```yaml
@@ -20,13 +22,20 @@ Crystal bindings for Hunspell.
 
 ## Usage
 
+```crystal
+require "hunspell"
+```
+
 Open a dictionary:
 
 ```crystal
-require "hunspell"
-
-# instantiate Hunspell with English affix and dictionary files
 hunspell = Hunspell.new("/usr/share/hunspell/en_US.aff", "/usr/share/hunspell/en_US.dic")
+```
+
+or
+
+```crystal
+hunspell = Hunspell.new("en_US")
 ```
 
 Check if a word is valid:

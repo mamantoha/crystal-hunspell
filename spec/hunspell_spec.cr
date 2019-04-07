@@ -45,4 +45,18 @@ describe Hunspell do
       end
     end
   end
+
+  context "initialized with locale" do
+    hunspell = Hunspell.new("en_US")
+
+    it "should check if a word is valid" do
+      hunspell.spellcheck("crystal").should be_true
+    end
+
+    it "should raise error if dictionary files could not be found" do
+      expect_raises ArgumentError do
+        Hunspell.new("en_US1")
+      end
+    end
+  end
 end

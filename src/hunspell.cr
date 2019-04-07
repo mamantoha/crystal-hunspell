@@ -3,14 +3,32 @@ require "./hunspell/**"
 class Hunspell
   @handle : LibHunspell::Hunhandle
 
+  # Known directories to search within for dictionaries.
+  KNOWN_DIRECTORIES = [
+    # Ubuntu
+    "/usr/share/hunspell",
+  ]
+
   def initialize(@handle : LibHunspell::Hunhandle)
     raise "Failed to initialize Hunspell." unless @handle
   end
 
   def initialize(aff_path : String, dict_path : String)
     handle = LibHunspell._create(aff_path, dict_path)
+    initialize(handle)
+  end
 
-    initialize handle
+  def initialize(locale : String)
+    KNOWN_DIRECTORIES.each do |directory|
+      aff_path = File.join(directory, "#{locale}.aff")
+      dict_path = File.join(directory, "#{locale}.dic")
+
+      if File.file?(aff_path) && File.file?(dict_path)
+        return initialize(aff_path, dict_path)
+      else
+        raise ArgumentError.new("Unable to find the dictionary #{locale} in any of the directories.")
+      end
+    end
   end
 
   # Returns dictionary encoding
