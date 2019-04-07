@@ -7,6 +7,9 @@ class Hunspell
   KNOWN_DIRECTORIES = [
     # Ubuntu
     "/usr/share/hunspell",
+    # macOS brew-installed hunspell
+    File.expand_path("~/Library/Spelling"),
+    "/Library/Spelling",
   ]
 
   def initialize(@handle : LibHunspell::Hunhandle)
@@ -25,10 +28,10 @@ class Hunspell
 
       if File.file?(aff_path) && File.file?(dict_path)
         return initialize(aff_path, dict_path)
-      else
-        raise ArgumentError.new("Unable to find the dictionary #{locale} in any of the directories.")
       end
     end
+
+    raise ArgumentError.new("Unable to find the dictionary #{locale} in any of the directories.")
   end
 
   # Returns dictionary encoding
