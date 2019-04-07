@@ -12,7 +12,7 @@ Crystal bindings for Hunspell.
 
    ```yaml
    dependencies:
-     crystal-hunspell:
+     hunspell:
        github: mamantoha/crystal-hunspell
    ```
 
