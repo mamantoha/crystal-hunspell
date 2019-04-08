@@ -17,6 +17,14 @@ class Hunspell
   end
 
   def initialize(aff_path : String, dict_path : String)
+    unless File.file?(aff_path)
+      raise ArgumentError.new("Invalid aff path #{aff_path.inspect}")
+    end
+
+    unless File.file?(dict_path)
+      raise ArgumentError.new("Invalid dict path #{dict_path.inspect}")
+    end
+
     handle = LibHunspell._create(aff_path, dict_path)
     initialize(handle)
   end
@@ -31,7 +39,7 @@ class Hunspell
       end
     end
 
-    raise ArgumentError.new("Unable to find the dictionary #{locale} in any of the directories.")
+    raise ArgumentError.new("Unable to find the dictionary #{locale.inspect} in any of the directories.")
   end
 
   # Returns dictionary encoding
@@ -60,6 +68,21 @@ class Hunspell
   def stem(word : String) : Array(String)
     n = LibHunspell._stem(@handle, out slst, word)
     make_list(n, slst)
+  end
+
+  # Adds a word to the dictionary.
+  def add(word : String) : Int32
+    LibHunspell._add(@handle, word)
+  end
+
+  # Adds a word to the dictionary with affix flags.
+  def add_with_affix(word : String, example : String) : Int32
+    LibHunspell._add_with_affix(@handle, word, example)
+  end
+
+  # Removes a word to the dictionary.
+  def remove(word : String) : Int32
+    LibHunspell._remove(@handle, word)
   end
 
   private def make_list(n : Int32, slst : Pointer(Pointer(UInt8))) : Array(String)
