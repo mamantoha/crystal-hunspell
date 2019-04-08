@@ -4,13 +4,22 @@ class Hunspell
   @handle : LibHunspell::Hunhandle
 
   # Known directories to search within for dictionaries.
-  KNOWN_DIRECTORIES = [
+  @@directories = [
     # Ubuntu
     "/usr/share/hunspell",
     # macOS brew-installed hunspell
     File.expand_path("~/Library/Spelling"),
     "/Library/Spelling",
   ]
+
+  def self.directories : Array(String)
+    @@directories
+  end
+
+  def self.directories=(directories)
+    @@directories = directories
+  end
+
 
   def initialize(@handle : LibHunspell::Hunhandle)
     raise "Failed to initialize Hunspell." unless @handle
@@ -22,7 +31,7 @@ class Hunspell
   end
 
   def initialize(locale : String)
-    KNOWN_DIRECTORIES.each do |directory|
+    @@directories.each do |directory|
       aff_path = File.join(directory, "#{locale}.aff")
       dict_path = File.join(directory, "#{locale}.dic")
 
