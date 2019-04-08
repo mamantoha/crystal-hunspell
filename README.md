@@ -40,7 +40,7 @@ hunspell = Hunspell.new("en_US")
 
 Check if a word is valid:
 
-```crystall
+```crystal
 hunspell.spellcheck("crystal")
 # => true
 
@@ -50,7 +50,7 @@ hunspell.spellcheck("cristal")
 
 Find the stems of a word:
 
-```crystall
+```crystal
 hunsell.stem("fishing")
 # => ["fishing", "fish"]
 ```
