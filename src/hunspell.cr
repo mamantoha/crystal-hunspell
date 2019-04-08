@@ -20,7 +20,6 @@ class Hunspell
     @@directories = directories
   end
 
-
   def initialize(@handle : LibHunspell::Hunhandle)
     raise "Failed to initialize Hunspell." unless @handle
   end
