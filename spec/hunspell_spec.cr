@@ -46,6 +46,24 @@ describe Hunspell do
     end
   end
 
+  describe "#add" do
+    it "should adds a word to the dictionary." do
+      hunspell.spellcheck("userpass").should be_false
+      hunspell.add("userpass")
+      hunspell.spellcheck("userpass").should be_true
+      hunspell.remove("userpass")
+    end
+  end
+
+  describe "#add_with_affix" do
+    it "should adds a word to the dictionary." do
+      hunspell.spellcheck("userpass").should be_false
+      hunspell.add_with_affix("userpass", "example")
+      hunspell.spellcheck("userpass").should be_true
+      hunspell.remove("userpass")
+    end
+  end
+
   context "initialized with locale" do
     hunspell = Hunspell.new("en_US")
 

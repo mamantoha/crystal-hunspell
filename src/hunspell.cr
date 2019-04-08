@@ -62,6 +62,21 @@ class Hunspell
     make_list(n, slst)
   end
 
+  # Adds a word to the dictionary.
+  def add(word : String) : Int32
+    LibHunspell._add(@handle, word)
+  end
+
+  # Adds a word to the dictionary with affix flags.
+  def add_with_affix(word : String, example : String) : Int32
+    LibHunspell._add_with_affix(@handle, word, example)
+  end
+
+  # Removes a word to the dictionary.
+  def remove(word : String) : Int32
+    LibHunspell._remove(@handle, word)
+  end
+
   private def make_list(n : Int32, slst : Pointer(Pointer(UInt8))) : Array(String)
     n.times.reduce([] of String) do |words, i|
       words << String.new(slst[i])
