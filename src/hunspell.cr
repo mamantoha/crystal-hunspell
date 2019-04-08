@@ -43,7 +43,8 @@ class Hunspell
       dict_path = File.join(directory, "#{locale}.dic")
 
       if File.file?(aff_path) && File.file?(dict_path)
-        return initialize(aff_path, dict_path)
+        handle = LibHunspell._create(aff_path, dict_path)
+        return initialize(handle)
       end
     end
 
