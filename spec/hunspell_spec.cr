@@ -3,6 +3,35 @@ require "./spec_helper"
 describe Hunspell do
   hunspell = Hunspell.new("/usr/share/hunspell/en_US.aff", "/usr/share/hunspell/en_US.dic")
 
+  describe "#initialize" do
+    context "with dict and aff path" do
+      it "should raise error if dictionary file could not be found" do
+        expect_raises ArgumentError, "Invalid aff path \"/usr/share/hunspell/en_US.aff_\"" do
+          Hunspell.new("/usr/share/hunspell/en_US.aff_", "/usr/share/hunspell/en_US.dic")
+        end
+      end
+
+      it "should raise error if affix file could not be found" do
+        expect_raises ArgumentError, "Invalid dict path \"/usr/share/hunspell/en_US.dic_\"" do
+          Hunspell.new("/usr/share/hunspell/en_US.aff", "/usr/share/hunspell/en_US.dic_")
+        end
+      end
+    end
+
+    context "with locale" do
+      it "should check if a word is valid" do
+        hunspell = Hunspell.new("en_US")
+        hunspell.spellcheck("crystal").should be_true
+      end
+
+      it "should raise error if dictionary files could not be found" do
+        expect_raises ArgumentError, "Unable to find the dictionary \"en_US1\" in any of the directories." do
+          Hunspell.new("en_US1")
+        end
+      end
+    end
+  end
+
   describe "#encoding" do
     it "should have encoding" do
       hunspell.encoding.should match(/UTF-8|ISO8859-1/)
@@ -61,20 +90,6 @@ describe Hunspell do
       hunspell.add_with_affix("userpass", "example")
       hunspell.spellcheck("userpass").should be_true
       hunspell.remove("userpass")
-    end
-  end
-
-  context "initialized with locale" do
-    hunspell = Hunspell.new("en_US")
-
-    it "should check if a word is valid" do
-      hunspell.spellcheck("crystal").should be_true
-    end
-
-    it "should raise error if dictionary files could not be found" do
-      expect_raises ArgumentError do
-        Hunspell.new("en_US1")
-      end
     end
   end
 end

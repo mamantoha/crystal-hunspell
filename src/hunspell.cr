@@ -17,6 +17,14 @@ class Hunspell
   end
 
   def initialize(aff_path : String, dict_path : String)
+    unless File.file?(aff_path)
+      raise ArgumentError.new("Invalid aff path #{aff_path.inspect}")
+    end
+
+    unless File.file?(dict_path)
+      raise ArgumentError.new("Invalid dict path #{dict_path.inspect}")
+    end
+
     handle = LibHunspell._create(aff_path, dict_path)
     initialize(handle)
   end
@@ -31,7 +39,7 @@ class Hunspell
       end
     end
 
-    raise ArgumentError.new("Unable to find the dictionary #{locale} in any of the directories.")
+    raise ArgumentError.new("Unable to find the dictionary #{locale.inspect} in any of the directories.")
   end
 
   # Returns dictionary encoding
