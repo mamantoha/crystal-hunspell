@@ -1,19 +1,25 @@
 require "./spec_helper"
 
 describe Hunspell do
-  hunspell = Hunspell.new("/usr/share/hunspell/en_US.aff", "/usr/share/hunspell/en_US.dic")
+  hunspell = Hunspell.new("en_US")
+
+  dict_path = {% if flag?(:darwin) %}
+                File.expand_path("~/Library/Spelling")
+              {% else %}
+                "/usr/share/hunspell"
+              {% end %}
 
   describe "#initialize" do
     context "with dict and aff path" do
       it "should raise error if dictionary file could not be found" do
-        expect_raises ArgumentError, "Invalid aff path \"/usr/share/hunspell/en_US.aff_\"" do
-          Hunspell.new("/usr/share/hunspell/en_US.aff_", "/usr/share/hunspell/en_US.dic")
+        expect_raises ArgumentError, "Invalid aff path \"#{dict_path}/en_US.aff_\"" do
+          Hunspell.new("#{dict_path}/en_US.aff_", "#{dict_path}/en_US.dic")
         end
       end
 
       it "should raise error if affix file could not be found" do
-        expect_raises ArgumentError, "Invalid dict path \"/usr/share/hunspell/en_US.dic_\"" do
-          Hunspell.new("/usr/share/hunspell/en_US.aff", "/usr/share/hunspell/en_US.dic_")
+        expect_raises ArgumentError, "Invalid dict path \"#{dict_path}/en_US.dic_\"" do
+          Hunspell.new("#{dict_path}/en_US.aff", "#{dict_path}/en_US.dic_")
         end
       end
     end
