@@ -62,6 +62,14 @@ hunspell.suggest("arbitrage")
 # => ["arbitrage", "arbitrages", "arbitrager", "arbitraged", "arbitrate"]
 ```
 
+## Development
+
+Generate bindings for Hunspell
+
+```console
+crystal ./lib/crystal_lib/src/main.cr -- src/hunspell/lib_hunspell.cr.in
+```
+
 ## Contributing
 
 1. Fork it (<https://github.com/mamantoha/crystal-hunspell/fork>)

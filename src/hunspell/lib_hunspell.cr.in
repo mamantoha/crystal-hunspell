@@ -1,0 +1,5 @@
+@[Include("hunspell/hunspell.h", prefix: %w(Hunspell_))]
+@[Link("hunspell")]
+
+lib LibHunspell
+end
