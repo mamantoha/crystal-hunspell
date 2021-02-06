@@ -1,5 +1,5 @@
 name: hunspell
-version: 0.3.0
+version: 0.4.0
 
 authors:
   - Anton Maminov <anton.maminov@gmail.com>
@@ -8,6 +8,6 @@ development_dependencies:
   crystal_lib:
     github: crystal-lang/crystal_lib
 
-crystal: 0.27.2
+crystal: ">= 0.36.0"
 
 license: MIT

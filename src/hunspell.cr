@@ -33,7 +33,7 @@ class Hunspell
       raise ArgumentError.new("Invalid dict path #{dict_path.inspect}")
     end
 
-    handle = LibHunspell._create(aff_path, dict_path)
+    handle = LibHunspell.create(aff_path, dict_path)
     initialize(handle)
   end
 
@@ -43,7 +43,7 @@ class Hunspell
       dict_path = File.join(directory, "#{locale}.dic")
 
       if File.file?(aff_path) && File.file?(dict_path)
-        handle = LibHunspell._create(aff_path, dict_path)
+        handle = LibHunspell.create(aff_path, dict_path)
         return initialize(handle)
       end
     end
@@ -53,45 +53,45 @@ class Hunspell
 
   # Returns dictionary encoding
   def encoding : String
-    String.new(LibHunspell._get_dic_encoding(@handle))
+    String.new(LibHunspell.get_dic_encoding(@handle))
   end
 
   # Spellcheck word
   def spellcheck(word : String) : Bool
-    result = LibHunspell._spell(@handle, word)
+    result = LibHunspell.spell(@handle, word)
     result == 0 ? false : true
   end
 
   # Search suggestions
   def suggest(word : String) : Array(String)
-    n = LibHunspell._suggest(@handle, out slst, word)
+    n = LibHunspell.suggest(@handle, out slst, word)
     make_list(n, slst)
   end
 
   # Morphological analysis of the word
   def analyze(word : String) : Array(String)
-    n = LibHunspell._analyze(@handle, out slst, word)
+    n = LibHunspell.analyze(@handle, out slst, word)
     make_list(n, slst)
   end
 
   def stem(word : String) : Array(String)
-    n = LibHunspell._stem(@handle, out slst, word)
+    n = LibHunspell.stem(@handle, out slst, word)
     make_list(n, slst)
   end
 
   # Adds a word to the dictionary.
   def add(word : String) : Int32
-    LibHunspell._add(@handle, word)
+    LibHunspell.add(@handle, word)
   end
 
   # Adds a word to the dictionary with affix flags.
   def add_with_affix(word : String, example : String) : Int32
-    LibHunspell._add_with_affix(@handle, word, example)
+    LibHunspell.add_with_affix(@handle, word, example)
   end
 
   # Removes a word to the dictionary.
   def remove(word : String) : Int32
-    LibHunspell._remove(@handle, word)
+    LibHunspell.remove(@handle, word)
   end
 
   private def make_list(n : Int32, slst : Pointer(Pointer(UInt8))) : Array(String)
