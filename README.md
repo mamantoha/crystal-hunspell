@@ -64,10 +64,14 @@ hunspell.suggest("arbitrage")
 
 ## Development
 
-Generate bindings for Hunspell
+```
+sudo apt install libclang-dev libhunspell-dev
+```
+
+Generate new bindings for Hunspell
 
 ```console
-crystal ./lib/crystal_lib/src/main.cr -- src/hunspell/lib_hunspell.cr.in
+crystal ./lib/crystal_lib/src/main.cr src/hunspell/lib_hunspell.cr.in > src/hunspell/lib_hunspell.cr
 ```
 
 ## Contributing
