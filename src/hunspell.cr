@@ -98,5 +98,7 @@ class Hunspell
     n.times.reduce([] of String) do |words, i|
       words << String.new(slst[i])
     end
+  ensure
+    LibHunspell.free_list(@handle, pointerof(slst), n)
   end
 end
