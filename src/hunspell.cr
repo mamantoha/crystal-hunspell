@@ -22,6 +22,7 @@ class Hunspell
 
   def initialize(@handle : LibHunspell::Hunhandle)
     raise "Failed to initialize Hunspell." unless @handle
+    @closed = false
   end
 
   def initialize(aff_path : String, dict_path : String)
@@ -49,6 +50,11 @@ class Hunspell
     end
 
     raise ArgumentError.new("Unable to find the dictionary #{locale.inspect} in any of the directories.")
+  end
+
+  def close
+    LibHunspell.destroy(@handle) unless @closed
+    @closed = true
   end
 
   # Returns dictionary encoding
