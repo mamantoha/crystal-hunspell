@@ -64,8 +64,7 @@ class Hunspell
 
   # Spellcheck word
   def spellcheck(word : String) : Bool
-    result = LibHunspell.spell(@handle, word)
-    result == 0 ? false : true
+    LibHunspell.spell(@handle, word) != 0
   end
 
   # Search suggestions
