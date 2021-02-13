@@ -52,6 +52,10 @@ class Hunspell
     raise ArgumentError.new("Unable to find the dictionary #{locale.inspect} in any of the directories.")
   end
 
+  def finalize
+    close
+  end
+
   def close
     LibHunspell.destroy(@handle) unless @closed
     @closed = true
