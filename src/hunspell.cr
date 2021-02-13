@@ -10,6 +10,8 @@ class Hunspell
     # macOS brew-installed hunspell
     File.expand_path("~/Library/Spelling"),
     "/Library/Spelling",
+    # Fedora
+    "/usr/share/myspell",
   ]
 
   def self.directories : Array(String)
