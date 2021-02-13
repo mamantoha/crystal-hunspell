@@ -62,6 +62,12 @@ hunspell.suggest("arbitrage")
 # => ["arbitrage", "arbitrages", "arbitrager", "arbitraged", "arbitrate"]
 ```
 
+Ensure to close `Hunspell` instance after using.
+
+```crystal
+hunspell.close
+```
+
 ## Development
 
 ```
