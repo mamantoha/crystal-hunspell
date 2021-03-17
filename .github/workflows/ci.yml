@@ -26,6 +26,8 @@ jobs:
         crystal: [latest, nightly]
     runs-on: ubuntu-latest
     steps:
+      - name: Install hunspell
+        run: sudo apt-get install hunspell libhunspell-dev
       - name: Install Crystal
         uses: oprypin/install-crystal@v1
         with:
