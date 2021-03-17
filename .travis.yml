@@ -1,8 +1,0 @@
-language: crystal
-
-before_install:
-  - sudo apt-get install -y hunspell libhunspell-dev
-
-script:
-  - crystal tool format --check
-  - crystal spec

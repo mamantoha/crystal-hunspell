@@ -1,6 +1,6 @@
 # crystal-hunspell
 
-[![Build Status](https://travis-ci.org/mamantoha/crystal-hunspell.svg?branch=master)](https://travis-ci.org/mamantoha/crystal-hunspell)
+[![CI](https://github.com/mamantoha/crystal-hunspell/actions/workflows/ci.yml/badge.svg)](https://github.com/mamantoha/crystal-hunspell/actions/workflows/ci.yml)
 [![GitHub release](https://img.shields.io/github/release/mamantoha/crystal-hunspell.svg)](https://github.com/mamantoha/crystal-hunspell/releases)
 [![License](https://img.shields.io/github/license/mamantoha/crystal-hunspell.svg)](https://github.com/mamantoha/crystal-hunspell/blob/master/LICENSE)
 
