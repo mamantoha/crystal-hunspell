@@ -27,7 +27,7 @@ describe Hunspell do
     context "with locale" do
       it "should check if a word is valid" do
         hunspell = Hunspell.new("en_US")
-        hunspell.spellcheck("crystal").should be_true
+        hunspell.spellcheck("correct").should be_true
       end
 
       it "should raise error if dictionary files could not be found" do
@@ -46,14 +46,14 @@ describe Hunspell do
 
   describe "#spellcheck" do
     it "should check if a word is valid" do
-      hunspell.spellcheck("crystal").should be_true
-      hunspell.spellcheck("cristal").should be_false
+      hunspell.spellcheck("correct").should be_true
+      hunspell.spellcheck("incorect").should be_false
     end
   end
 
   describe "#analyze" do
     it "should analyze a word" do
-      hunspell.analyze("crystal").should eq([" st:crystal"])
+      hunspell.analyze("permanently").should eq([" st:permanent fl:Y"])
     end
   end
 
@@ -88,7 +88,7 @@ describe Hunspell do
 
     context "when there are no stems" do
       it "should return []" do
-        hunspell.stem("zzzzzzz").should be_empty
+        hunspell.stem("________").should be_empty
       end
     end
   end
