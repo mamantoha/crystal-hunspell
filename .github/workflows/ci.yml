@@ -27,7 +27,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Install hunspell
-        run: sudo apt-get install hunspell libhunspell-dev
+        run: brew install hunspell
       - name: Install Crystal
         uses: oprypin/install-crystal@v1
         with:
