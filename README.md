@@ -22,6 +22,8 @@ Before installing `crystal-hunspell` ensure you have [hunspell](https://github.c
 
 ## Usage
 
+The library has been tested with Hunspell version 1.7.2.
+
 ```crystal
 require "hunspell"
 ```

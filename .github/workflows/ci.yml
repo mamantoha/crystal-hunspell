@@ -27,7 +27,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Install hunspell
-        run: sudo apt-get install hunspell libhunspell-dev
+        run: sudo apt-get install autoconf automake autopoint libtool
+      - name: Build Hunspell from sources
+        run: |
+          wget https://github.com/hunspell/hunspell/releases/download/v1.7.2/hunspell-1.7.2.tar.gz
+          tar xzvf hunspell-1.7.2.tar.gz
+          cd hunspell-1.7.2
+          autoreconf -vfi
+          ./configure
+          make
+          sudo make install
+          sudo ldconfig
       - name: Install Crystal
         uses: crystal-lang/install-crystal@v1
         with:
