@@ -101,11 +101,11 @@ You can also request bulk actions against Hunspell. Currently `suggest`, `suffix
 ```crystal
 hunspell.bulk_suggest(["correct", "incorect"])
 # => {"correct"  => ["correct", "corrects", "cor rect", "cor-rect"],
-      "incorect" => ["incorrect", "correction", "corrector", "injector", "correct"]}
+#     "incorect" => ["incorrect", "correction", "corrector", "injector", "correct"]}
 
 hunspell.bulk_suffix_suggest(["cat", "do"])
 # => {"cat" => ["cats", "cat's"],
-      "do"  => ["doing", "doth", "doer", "dos", "do's", "doings", "doers"]}
+#     "do"  => ["doing", "doth", "doer", "dos", "do's", "doings", "doers"]}
 
 hunspell.bulk_stem(["stems", "currencies"])
 # => {"stems" => ["stem"], "currencies" => ["currency"]}
