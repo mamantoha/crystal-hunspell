@@ -87,7 +87,9 @@ describe Hunspell do
 
   describe "#suffix_suggest" do
     it "should suffix_suggest alternate spellings for words" do
-      hunspell.suffix_suggest("do").should contain("dot")
+      hunspell.suffix_suggest("do").should eq(
+        ["dew", "od", "so", "fo", "di", "d", "o", "doe", "dos", "ado", "don", "dor", "dot", "dol", "doc"]
+      )
     end
 
     context "when there are no suggestions" do
