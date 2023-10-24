@@ -27,7 +27,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Install hunspell
-        run: sudo apt-get install hunspell libhunspell-dev
+        run: sudo apt-get install hunspell libhunspell-dev build-essential
       - name: Build Hunspell from sources
         run: |
           wget https://github.com/hunspell/hunspell/releases/download/v1.7.2/hunspell-1.7.2.tar.gz
