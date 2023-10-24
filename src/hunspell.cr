@@ -14,6 +14,8 @@ class Hunspell
     "/usr/share/myspell",
   ]
 
+  BULK_METHODS = ["suggest", "suffix_suggest", "stem", "analyze"]
+
   def self.directories : Array(String)
     @@directories
   end
@@ -94,6 +96,14 @@ class Hunspell
     n = LibHunspell.stem(@handle, out slst, word)
     make_list(n, slst)
   end
+
+  {% for method in BULK_METHODS %}
+    def bulk_{{method.id}}(words : Array(String)) : Hash(String, Array(String))
+      words.each_with_object({} of String => Array(String)) do |word, memo|
+        memo[word] = {{method.id}}(word)
+      end
+    end
+  {% end %}
 
   # Adds a word to the dictionary.
   def add(word : String) : Int32
