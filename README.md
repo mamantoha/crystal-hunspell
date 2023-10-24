@@ -53,10 +53,10 @@ Below are some simple examples for how to use the repository.
 It's a simple task to ask if a particular word is in the dictionary.
 
 ```crystal
-hunspell.spellcheck("correct")
+hunspell.spell?("correct")
 # => true
 
-hunspell.spellcheck("incorect")
+hunspell.spell?("incorect")
 # => false
 ```
 
