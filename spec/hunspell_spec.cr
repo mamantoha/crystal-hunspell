@@ -59,12 +59,24 @@ describe Hunspell do
 
   describe "#suggest" do
     it "should suggest alternate spellings for words" do
-      hunspell.suggest("crystal").should contain("crustal")
+      hunspell.suggest("incorect").should contain("incorrect")
     end
 
     context "when there are no suggestions" do
       it "should return []" do
         hunspell.suggest("________").should be_empty
+      end
+    end
+  end
+
+  describe "#suffix_suggest" do
+    it "should suffix_suggest alternate spellings for words" do
+      hunspell.suffix_suggest("do").should contain("dot")
+    end
+
+    context "when there are no suggestions" do
+      it "should return []" do
+        hunspell.suffix_suggest("________").should be_empty
       end
     end
   end
