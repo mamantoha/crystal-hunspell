@@ -62,6 +62,13 @@ hunspell.suggest("arbitrage")
 # => ["arbitrage", "arbitrages", "arbitrager", "arbitraged", "arbitrate"]
 ```
 
+Suffix match:
+
+```crystal
+hunspell.suffix_suggest("do")
+# => ["doing", "doth", "doer", "dos", "do's", "doings", "doers"]
+```
+
 Ensure to close `Hunspell` instance after using.
 
 ```crystal
@@ -76,6 +83,10 @@ You can also request bulk actions against Hunspell. Currently `suggest`, `suffix
 hunspell.bulk_suggest(["correct", "incorect"])
 # => {"correct"  => ["correct", "corrects", "cor rect", "cor-rect"],
       "incorect" => ["incorrect", "correction", "corrector", "injector", "correct"]}
+
+hunspell.bulk_suffix_suggest(["cat", "do"])
+# => {"cat" => ["cats", "cat's"],
+      "do"  => ["doing", "doth", "doer", "dos", "do's", "doings", "doers"]}
 
 hunspell.bulk_stem(["stems", "currencies"])
 # => {"stems" => ["stem"], "currencies" => ["currency"]}
