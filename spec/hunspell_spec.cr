@@ -88,7 +88,7 @@ describe Hunspell do
   describe "#suffix_suggest" do
     it "should suffix_suggest alternate spellings for words" do
       hunspell.suffix_suggest("do").should eq(
-        ["dew", "od", "so", "fo", "di", "d", "o", "doe", "dos", "ado", "don", "dor", "dot", "dol", "doc"]
+        ["doing", "doth", "doer", "dos", "do's", "doings", "doers"]
       )
     end
 
@@ -101,10 +101,9 @@ describe Hunspell do
 
   describe "#bulk_suffix_suggest" do
     it "should suggest alternate spellings for words" do
-      result = hunspell.bulk_suffix_suggest(["cat", "do"])
-
-      result["cat"].should contain("car")
-      result["do"].should contain("dot")
+      hunspell.bulk_suffix_suggest(["cat", "do"]).should eq(
+        {"cat" => ["cats", "cat's"],
+         "do"  => ["doing", "doth", "doer", "dos", "do's", "doings", "doers"]})
     end
   end
 

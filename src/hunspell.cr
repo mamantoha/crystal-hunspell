@@ -82,7 +82,7 @@ class Hunspell
   end
 
   def suffix_suggest(word : String) : Array(String)
-    n = LibHunspell.suggest(@handle, out slst, word)
+    n = LibHunspell.suffix_suggest(@handle, out slst, word)
     make_list(n, slst)
   end
 
