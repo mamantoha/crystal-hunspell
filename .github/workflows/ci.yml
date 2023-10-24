@@ -13,7 +13,7 @@ jobs:
       - name: Install Crystal
         uses: oprypin/install-crystal@v1
       - name: Check out repository code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
       - name: Install dependencies
         run: shards install --ignore-crystal-version
       - name: Check format
@@ -33,7 +33,7 @@ jobs:
         with:
           crystal: ${{ matrix.crystal }}
       - name: Check out repository code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
       - name: Install dependencies
         run: shards install --ignore-crystal-version
       - name: Run tests
