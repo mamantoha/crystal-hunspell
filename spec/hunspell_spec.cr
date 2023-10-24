@@ -38,6 +38,12 @@ describe Hunspell do
     end
   end
 
+  describe "#version" do
+    it "should have version" do
+      hunspell.version.should match(/1\.7\.\d+/)
+    end
+  end
+
   describe "#encoding" do
     it "should have encoding" do
       hunspell.encoding.should match(/UTF-8|ISO8859-1/)
@@ -57,6 +63,14 @@ describe Hunspell do
     end
   end
 
+  describe "#bulk_analyze" do
+    it "should analyze words" do
+      hunspell.bulk_analyze(["dog", "permanently"]).should eq(
+        {"dog" => [" st:dog"], "permanently" => [" st:permanent fl:Y"]}
+      )
+    end
+  end
+
   describe "#suggest" do
     it "should suggest alternate spellings for words" do
       hunspell.suggest("incorect").should contain("incorrect")
@@ -69,15 +83,33 @@ describe Hunspell do
     end
   end
 
+  describe "#bulk_suggest" do
+    it "should suggest alternate spellings for words" do
+      hunspell.bulk_suggest(["correct", "incorect"]).should eq(
+        {"correct"  => ["correct", "corrects", "cor rect", "cor-rect"],
+         "incorect" => ["incorrect", "correction", "corrector", "injector", "correct"]})
+    end
+  end
+
   describe "#suffix_suggest" do
     it "should suffix_suggest alternate spellings for words" do
-      hunspell.suffix_suggest("do").should contain("dot")
+      hunspell.suffix_suggest("do").should eq(
+        ["doing", "doth", "doer", "dos", "do's", "doings", "doers"]
+      )
     end
 
     context "when there are no suggestions" do
       it "should return []" do
         hunspell.suffix_suggest("________").should be_empty
       end
+    end
+  end
+
+  describe "#bulk_suffix_suggest" do
+    it "should suggest alternate spellings for words" do
+      hunspell.bulk_suffix_suggest(["cat", "do"]).should eq(
+        {"cat" => ["cats", "cat's"],
+         "do"  => ["doing", "doth", "doer", "dos", "do's", "doings", "doers"]})
     end
   end
 
@@ -90,6 +122,12 @@ describe Hunspell do
       it "should return []" do
         hunspell.stem("________").should be_empty
       end
+    end
+  end
+
+  describe "#bulk_stem" do
+    it "should find the stems of a word" do
+      hunspell.bulk_stem(["stems", "currencies"]).should eq({"stems" => ["stem"], "currencies" => ["currency"]})
     end
   end
 

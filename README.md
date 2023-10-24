@@ -38,34 +38,80 @@ or
 hunspell = Hunspell.new("en_US")
 ```
 
-Check if a word is valid:
+Ensure to close `Hunspell` instance after using.
 
 ```crystal
-hunspell.spellcheck("crystal")
+hunspell.close
+```
+
+Below are some simple examples for how to use the repository.
+
+### Spelling
+
+It's a simple task to ask if a particular word is in the dictionary.
+
+```crystal
+hunspell.spellcheck("correct")
 # => true
 
-hunspell.spellcheck("cristal")
+hunspell.spellcheck("incorect")
 # => false
 ```
 
-Find the stems of a word:
+This will only ever return `true` or `false`, and won't give suggestions about why it might be wrong. It also depends on your choice of dictionary.
 
-```crystal
-hunsell.stem("fishing")
-# => ["fishing", "fish"]
-```
+### Suggestions
 
-Suggest alternate spellings for a word:
+If you want to get a suggestion from Hunspell, it can provide a corrected label given a basestring input.
 
 ```crystal
 hunspell.suggest("arbitrage")
 # => ["arbitrage", "arbitrages", "arbitrager", "arbitraged", "arbitrate"]
 ```
 
-Ensure to close `Hunspell` instance after using.
+### Suffix Match
 
 ```crystal
-hunspell.close
+hunspell.suffix_suggest("do")
+# => ["doing", "doth", "doer", "dos", "do's", "doings", "doers"]
+```
+
+### Stemming
+
+The module can also stem words, providing the stems for pluralization and other inflections.
+
+```crystal
+hunsell.stem("fishing")
+# => ["fishing", "fish"]
+```
+
+### Analyze
+
+Like stemming but return morphological analysis of the input instead.
+
+```crystal
+hunspell.analyze("permanently")
+# => [" st:permanent fl:Y"]
+```
+
+### Bulk Requests
+
+You can also request bulk actions against Hunspell. Currently `suggest`, `suffix_suggest`, `stem`, and `analyze` are bulk requestable.
+
+```crystal
+hunspell.bulk_suggest(["correct", "incorect"])
+# => {"correct"  => ["correct", "corrects", "cor rect", "cor-rect"],
+#     "incorect" => ["incorrect", "correction", "corrector", "injector", "correct"]}
+
+hunspell.bulk_suffix_suggest(["cat", "do"])
+# => {"cat" => ["cats", "cat's"],
+#     "do"  => ["doing", "doth", "doer", "dos", "do's", "doings", "doers"]}
+
+hunspell.bulk_stem(["stems", "currencies"])
+# => {"stems" => ["stem"], "currencies" => ["currency"]}
+
+hunspell.bulk_analyze(["dog", "permanently"])
+# => {"dog" => [" st:dog"], "permanently" => [" st:permanent fl:Y"]}
 ```
 
 ## Development

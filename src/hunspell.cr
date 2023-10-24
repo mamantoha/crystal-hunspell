@@ -14,6 +14,8 @@ class Hunspell
     "/usr/share/myspell",
   ]
 
+  BULK_METHODS = ["suggest", "suffix_suggest", "stem", "analyze"]
+
   def self.directories : Array(String)
     @@directories
   end
@@ -63,6 +65,12 @@ class Hunspell
     @closed = true
   end
 
+  def version : String
+    version_match = `hunspell -vv`.match(/Hunspell (\d+\.\d+\.\d+)/)
+
+    version_match ? version_match[1] : ""
+  end
+
   # Returns dictionary encoding
   def encoding : String
     String.new(LibHunspell.get_dic_encoding(@handle))
@@ -80,7 +88,7 @@ class Hunspell
   end
 
   def suffix_suggest(word : String) : Array(String)
-    n = LibHunspell.suggest(@handle, out slst, word)
+    n = LibHunspell.suffix_suggest(@handle, out slst, word)
     make_list(n, slst)
   end
 
@@ -94,6 +102,14 @@ class Hunspell
     n = LibHunspell.stem(@handle, out slst, word)
     make_list(n, slst)
   end
+
+  {% for method in BULK_METHODS %}
+    def bulk_{{method.id}}(words : Array(String)) : Hash(String, Array(String))
+      words.each_with_object({} of String => Array(String)) do |word, memo|
+        memo[word] = {{method.id}}(word)
+      end
+    end
+  {% end %}
 
   # Adds a word to the dictionary.
   def add(word : String) : Int32
