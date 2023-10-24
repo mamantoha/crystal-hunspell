@@ -41,10 +41,10 @@ hunspell = Hunspell.new("en_US")
 Check if a word is valid:
 
 ```crystal
-hunspell.spellcheck("crystal")
+hunspell.spellcheck("correct")
 # => true
 
-hunspell.spellcheck("cristal")
+hunspell.spellcheck("incorect")
 # => false
 ```
 
@@ -66,6 +66,22 @@ Ensure to close `Hunspell` instance after using.
 
 ```crystal
 hunspell.close
+```
+
+### Bulk Requests
+
+You can also request bulk actions against Hunspell. Currently `suggest`, `suffix_suggest`, `stem`, and `analyze` are bulk requestable.
+
+```crystal
+hunspell.bulk_suggest(["correct", "incorect"])
+# => {"correct"  => ["correct", "corrects", "cor rect", "cor-rect"],
+      "incorect" => ["incorrect", "correction", "corrector", "injector", "correct"]}
+
+hunspell.bulk_stem(["stems", "currencies"])
+# => {"stems" => ["stem"], "currencies" => ["currency"]}
+
+hunspell.bulk_analyze(["dog", "permanently"])
+# => {"dog" => [" st:dog"], "permanently" => [" st:permanent fl:Y"]}
 ```
 
 ## Development
