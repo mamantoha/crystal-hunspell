@@ -76,9 +76,14 @@ class Hunspell
     String.new(LibHunspell.get_dic_encoding(@handle))
   end
 
-  # Spellcheck word
-  def spellcheck(word : String) : Bool
+  # Check if a particular `word` is in the dictionary
+  def spell?(word : String) : Bool
     LibHunspell.spell(@handle, word) != 0
+  end
+
+  @[Deprecated("Use spell?(word : String) instead")]
+  def spellcheck(word : String) : Bool
+    spell?(word)
   end
 
   # Search suggestions

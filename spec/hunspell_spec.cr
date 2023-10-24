@@ -27,7 +27,7 @@ describe Hunspell do
     context "with locale" do
       it "should check if a word is valid" do
         hunspell = Hunspell.new("en_US")
-        hunspell.spellcheck("correct").should be_true
+        hunspell.spell?("correct").should be_true
       end
 
       it "should raise error if dictionary files could not be found" do
@@ -47,6 +47,13 @@ describe Hunspell do
   describe "#encoding" do
     it "should have encoding" do
       hunspell.encoding.should match(/UTF-8|ISO8859-1/)
+    end
+  end
+
+  describe "#spell?" do
+    it "should check if a word is valid" do
+      hunspell.spell?("correct").should be_true
+      hunspell.spell?("incorect").should be_false
     end
   end
 
@@ -133,17 +140,17 @@ describe Hunspell do
 
   describe "#add" do
     it "should adds a word to the dictionary." do
-      hunspell.spellcheck("userpass").should be_false
+      hunspell.spell?("userpass").should be_false
       hunspell.add("userpass")
-      hunspell.spellcheck("userpass").should be_true
+      hunspell.spell?("userpass").should be_true
       hunspell.remove("userpass")
     end
 
     context "with affix" do
       it "should adds a word to the dictionary." do
-        hunspell.spellcheck("userpass").should be_false
+        hunspell.spell?("userpass").should be_false
         hunspell.add("userpass", "example")
-        hunspell.spellcheck("userpass").should be_true
+        hunspell.spell?("userpass").should be_true
         hunspell.remove("userpass")
       end
     end
@@ -151,9 +158,9 @@ describe Hunspell do
 
   describe "#add_with_affix" do
     it "should adds a word to the dictionary." do
-      hunspell.spellcheck("userpass").should be_false
+      hunspell.spell?("userpass").should be_false
       hunspell.add_with_affix("userpass", "example")
-      hunspell.spellcheck("userpass").should be_true
+      hunspell.spell?("userpass").should be_true
       hunspell.remove("userpass")
     end
   end
