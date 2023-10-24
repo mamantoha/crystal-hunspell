@@ -79,6 +79,11 @@ class Hunspell
     make_list(n, slst)
   end
 
+  def suffix_suggest(word : String) : Array(String)
+    n = LibHunspell.suggest(@handle, out slst, word)
+    make_list(n, slst)
+  end
+
   # Morphological analysis of the word
   def analyze(word : String) : Array(String)
     n = LibHunspell.analyze(@handle, out slst, word)
