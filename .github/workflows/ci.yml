@@ -22,16 +22,12 @@ jobs:
   test:
     strategy:
       fail-fast: false
-      matrix:
-        crystal: [latest, nightly]
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
       - name: Install hunspell
-        run: sudo apt-get install hunspell libhunspell-dev
+        run: brew install hunspell
       - name: Install Crystal
         uses: crystal-lang/install-crystal@v1
-        with:
-          crystal: ${{ matrix.crystal }}
       - name: Check out repository code
         uses: actions/checkout@v4
       - name: Install dependencies
