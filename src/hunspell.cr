@@ -65,6 +65,12 @@ class Hunspell
     @closed = true
   end
 
+  def version : String
+    version_match = `hunspell -vv`.match(/Hunspell (\d+\.\d+\.\d+)/)
+
+    version_match ? version_match[1] : ""
+  end
+
   # Returns dictionary encoding
   def encoding : String
     String.new(LibHunspell.get_dic_encoding(@handle))
