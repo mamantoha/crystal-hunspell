@@ -100,6 +100,15 @@ describe Hunspell do
       hunspell.spellcheck("userpass").should be_true
       hunspell.remove("userpass")
     end
+
+    context "with affix" do
+      it "should adds a word to the dictionary." do
+        hunspell.spellcheck("userpass").should be_false
+        hunspell.add("userpass", "example")
+        hunspell.spellcheck("userpass").should be_true
+        hunspell.remove("userpass")
+      end
+    end
   end
 
   describe "#add_with_affix" do
