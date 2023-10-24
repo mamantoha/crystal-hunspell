@@ -31,7 +31,7 @@ jobs:
       - name: Build Hunspell from sources
         run: |
           wget https://github.com/hunspell/hunspell/releases/download/v1.7.2/hunspell-1.7.2.tar.gz
-          tar hunspell-1.7.2.tar.gz
+          tar xzvf hunspell-1.7.2.tar.gz
           cd hunspell-1.7.2
           autoreconf -vfi
           ./configure
