@@ -81,11 +81,6 @@ class Hunspell
     LibHunspell.spell(@handle, word) != 0
   end
 
-  @[Deprecated("Use spell?(word : String) instead")]
-  def spellcheck(word : String) : Bool
-    spell?(word)
-  end
-
   # Search suggestions
   def suggest(word : String) : Array(String)
     n = LibHunspell.suggest(@handle, out slst, word)
@@ -124,12 +119,6 @@ class Hunspell
   # Adds a word to the dictionary with affix flags.
   def add(word : String, example : String) : Int32
     LibHunspell.add_with_affix(@handle, word, example)
-  end
-
-  # Adds a word to the dictionary with affix flags.
-  @[Deprecated("Use add(word : String, example : String) instead")]
-  def add_with_affix(word : String, example : String) : Int32
-    add(word, example)
   end
 
   # Removes a word to the dictionary.

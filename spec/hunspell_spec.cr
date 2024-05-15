@@ -57,13 +57,6 @@ describe Hunspell do
     end
   end
 
-  describe "#spellcheck" do
-    it "should check if a word is valid" do
-      hunspell.spellcheck("correct").should be_true
-      hunspell.spellcheck("incorect").should be_false
-    end
-  end
-
   describe "#analyze" do
     it "should analyze a word" do
       hunspell.analyze("permanently").should eq([" st:permanent fl:Y"])
@@ -159,7 +152,7 @@ describe Hunspell do
   describe "#add_with_affix" do
     it "should adds a word to the dictionary." do
       hunspell.spell?("userpass").should be_false
-      hunspell.add_with_affix("userpass", "example")
+      hunspell.add("userpass", "example")
       hunspell.spell?("userpass").should be_true
       hunspell.remove("userpass")
     end
