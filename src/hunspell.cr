@@ -1,7 +1,7 @@
 require "./hunspell/**"
 
 class Hunspell
-  @handle : LibHunspell::Hunhandle
+  @handle : Pointer(Void)
 
   # Known directories to search within for dictionaries.
   @@directories = [
@@ -24,7 +24,7 @@ class Hunspell
     @@directories = directories
   end
 
-  def initialize(@handle : LibHunspell::Hunhandle)
+  def initialize(@handle : Pointer(Void))
     raise "Failed to initialize Hunspell." unless @handle
     @closed = false
   end
