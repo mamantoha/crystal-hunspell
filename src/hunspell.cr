@@ -104,9 +104,9 @@ class Hunspell
   end
 
   {% for method in BULK_METHODS %}
-    def bulk_{{method.id}}(words : Array(String)) : Hash(String, Array(String))
+    def bulk_{{ method.id }}(words : Array(String)) : Hash(String, Array(String))
       words.each_with_object({} of String => Array(String)) do |word, memo|
-        memo[word] = {{method.id}}(word)
+        memo[word] = {{ method.id }}(word)
       end
     end
   {% end %}
