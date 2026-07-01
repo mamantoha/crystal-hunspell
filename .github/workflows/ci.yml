@@ -19,6 +19,14 @@ jobs:
       - name: Check format
         run: crystal tool format --check
 
+  check_ameba:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v7
+      - name: Run Ameba linter
+        uses: crystal-ameba/github-action@master
+
   test:
     strategy:
       fail-fast: false
